@@ -35,3 +35,17 @@ lib/
         ├── pages/
         └── widgets/
 ```
+
+### 2. Bloc
+#### Install Bloc extention
+If the Bloc Extention is installed inside VS Code, it is possible to rigth click a folder and press create Bloc. The Extention will than create the needed bloc structure.
+
+create the folowing folder Structure:
+
+```shell
+../application/
+└── bloc/
+    ├── advice_bloc.dart
+    ├── advice_event.dart
+    └── advice_state.dart
+```
