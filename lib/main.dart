@@ -1,4 +1,8 @@
+import 'package:advice_api/api_request_feature/presentation/advice_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'api_request_feature/application/bloc/advice_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +18,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AdviceBloc(),
+          ),
+        ],
+        child: const MyHomePage(),
+      ),
     );
   }
 }
@@ -29,19 +40,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //Sould be wrapped with Bloc Widget.
-          const Text('I am an advice from the api'),
-          TextButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.api),
-              label: const Text('Start Api request '))
-        ],
-      ),
+    return const Scaffold(
+      body: AdviceScreen(),
     );
   }
 }
