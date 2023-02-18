@@ -52,14 +52,43 @@ Create the folowing folder Structure:
 ```
 
 #### 2.1 Define events when button is pressed
-In Bloc you have to define you events, for example if an button is pressed. Every Event gets defined as a ``class``that will extends the `àbstract class``.
+In Bloc you have to define you events, for example if an button is pressed. Every Event gets defined as a ``class`` that will extends the ``abstract class``.
 
 ```dart
+// advice_event.dart
 part of './api_request_bloc.dart';
 
 @immutable
-abstract class ApiRequestEvent {}
+abstract class AdviceEvent {}
 
 /// Event when button is pressed and sould call the api request.
-class ApiRequestedEvent extends ApiRequestEvent {}
+class AdviceRequestedEvent extends AdviceEvent {}
+```
+
+#### 2.2 Define state of the widget
+If the events are defined, it is important to define the different states of the widgets. Those can be for example ``loading,loaded or error``. The ``initial`` defines the first state when the widget gets rendered.
+
+Comparable to the event file, a state gets created as a ``class`` that extends the abstract class AdviceState 
+
+```dart
+// advice_state.dart
+part of './api_request_bloc.dart';
+
+@immutable
+abstract class AdviceState {}
+
+// Defines the first state when Widget is loaded
+class ApiRequestInitial extends AdviceState {}
+
+class ApiRequestLoading extends AdviceState {}
+
+class ApiRequestLoaded extends AdviceState {
+  final String advice;
+  ApiRequestLoaded({required this.advice});
+}
+
+class ApiRequestError extends AdviceState {
+  final String error;
+  ApiRequestError({required this.error});
+}
 ```
