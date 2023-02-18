@@ -51,4 +51,15 @@ Create the folowing folder Structure:
     └── advice_state.dart
 ```
 
-#### 
+#### 2.1 Define events when button is pressed
+In Bloc you have to define you events, for example if an button is pressed. Every Event gets defined as a ``class``that will extends the `àbstract class``.
+
+```dart
+part of './api_request_bloc.dart';
+
+@immutable
+abstract class ApiRequestEvent {}
+
+/// Event when button is pressed and sould call the api request.
+class ApiRequestedEvent extends ApiRequestEvent {}
+```
