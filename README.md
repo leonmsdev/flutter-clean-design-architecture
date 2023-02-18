@@ -1,16 +1,17 @@
 # flutter-clean-design-architecture
 
 This Project describes a the clean design architecture pattern for flutter applications.
+The goal is to create an text widget that triggers an api, when ever a button is pressed.
 
 ## Getting Started
 
 ### 1. Install dependencies
 First, install the following packages
 ```yaml
-dartz: ^0.10.1
-bloc: ^8.1.1
-flutter_bloc: ^8.1.2
-http: ^0.13.
+dartz: ^0.10.1 # Needet for functional programming
+bloc: ^8.1.1 # Install bloc
+flutter_bloc: ^8.1.2 # Install flutter bloc for state management
+http: ^0.13. # Handles api requests
 ```
 
 ### 2. Folder Structure
@@ -40,7 +41,7 @@ lib/
 #### Install Bloc extention
 If the Bloc Extention is installed inside VS Code, it is possible to rigth click a folder and press create Bloc. The Extention will than create the needed bloc structure.
 
-create the folowing folder Structure:
+Create the folowing folder Structure:
 
 ```shell
 ../application/
@@ -49,3 +50,5 @@ create the folowing folder Structure:
     ├── advice_event.dart
     └── advice_state.dart
 ```
+
+#### 
