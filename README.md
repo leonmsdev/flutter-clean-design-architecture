@@ -114,7 +114,7 @@ If the provider is initialised you can use the Bloc in the presentation layer in
 ```dart
 // /presentation/advice
 ```
-
+#
 ### Dependency Injection
 Dependency injection helps reduce dependencies between objects. By using dependency injection, you can assign use cases to your Bloc from outside the Bloc as a parameter. This allows you to easily mock the use case for testing.
 
@@ -126,8 +126,7 @@ For dependency inject we use the flutter get_it package.
 final GetIt sl = GetIt.instance; //sl = Service-Locator
 ```
 2. Create ``init()`` class that will hold the dependency relations
-3. Use registerFactory() to create a new object every time the class is called, or registerLazySingleton
-() to initialize the object just once.
+3. Use ``registerFactory()`` to create a new object every time the class is called, or ``registerLazySingleton()`` to initialize the object just once.
 ```dart
 Future<void> init() async {
   // Blocs
@@ -140,8 +139,11 @@ Future<void> init() async {
 
 4. add the following to you ``main()`` function
 ```dart
-WidgetsFlutterBinding.ensureInitialized(); //make sure that all dependencies are initialised before app start.
-await di.init(); //init the dependencies
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //make sure that all dependencies are initialised before app 
+  await di.init(); //init the dependencies
+  runApp(const MyApp());
+}
 ```
 
 5. Make sure that the bloc will use the service locator inside the ``create:`` attribute
