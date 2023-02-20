@@ -121,10 +121,24 @@ Dependency injection helps reduce dependencies between objects. By using depende
 To implement dependency injection, you can use the Flutter Get_it package. First, initialize the Get_it instance, then create an init() class to register your objects. Use registerFactory() to create a new object every time the class is called, or registerLazySingleton() to initialize the object just once.
 
 For dependency inject we use the flutter get_it package.
-1. Create instance of Getit.
-2. Create init() class
-3. Use registerFactory() to create a new object every time the class is called, or registerLazySingleton() to initialize the object just once.
-4. add the following to you main()
+1. Create instance of Get_it.
+```dart
+final GetIt sl = GetIt.instance; //sl = Service-Locator
+```
+2. Create ``init()`` class that will hold the dependency relations
+3. Use registerFactory() to create a new object every time the class is called, or registerLazySingleton
+() to initialize the object just once.
+```dart
+Future<void> init() async {
+  // Blocs
+  sl.registerFactory(() => ApiRequestBloc(usecases: sl()));
+
+  //Usecases
+  sl.registerLazySingleton(() => AdvicerUseCases(advicerRepository: sl()));
+}
+```
+
+4. add the following to you ``main()`` function
 ```dart
 WidgetsFlutterBinding.ensureInitialized(); //make sure that all dependencies are initialised before app start.
 await di.init(); //init the dependencies
