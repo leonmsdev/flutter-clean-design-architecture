@@ -1,4 +1,5 @@
-import 'package:advice_api/api_request_feature/presentation/advice_screen.dart';
+import 'package:advice_api/api_request_feature/application/bloc/container_bloc.dart';
+import 'package:advice_api/api_request_feature/presentation/screens/advice_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => AdviceBloc(),
+          ),
+          BlocProvider(
+            create: (context) => ContainerBloc(),
           ),
         ],
         child: const MyHomePage(),

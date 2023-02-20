@@ -13,6 +13,7 @@ dartz: ^0.10.1 # Needet for functional programming
 bloc: ^8.1.1 # Install bloc
 flutter_bloc: ^8.1.2 # Install flutter bloc for state management
 http: ^0.13. # Handles api requests
+get_it: ^7.2.0 # Used for dependency injection
 ```
 ##
 ### 2. Folder Structure
@@ -95,7 +96,7 @@ class ApiRequestError extends AdviceState {
 }
 ```
 
-**Initialise Block Provider**
+**Initialise Block Provider** \n
 To initialize the app, simply wrap the parent widget with a BlocProvider. This will enable all underlying widgets to seamlessly use the Bloc with the BlocBuilder Widget. Additionally, you can define various providers within the providers array to further enhance the app's functionality.
 ```dart
 // main.dart
@@ -109,3 +110,30 @@ home: MultiBlocProvider(
       ),
 ```
 
+If the provider is initialised you can use the Bloc in the presentation layer inside you widget.
+```dart
+// /presentation/advice
+```
+
+### Dependency Injection
+Dependency injection helps reduce dependencies between objects. By using dependency injection, you can assign use cases to your Bloc from outside the Bloc as a parameter. This allows you to easily mock the use case for testing.
+
+To implement dependency injection, you can use the Flutter Get_it package. First, initialize the Get_it instance, then create an init() class to register your objects. Use registerFactory() to create a new object every time the class is called, or registerLazySingleton() to initialize the object just once.
+
+For dependency inject we use the flutter get_it package.
+1. Create instance of Getit.
+2. Create init() class
+3. Use registerFactory() to create a new object every time the class is called, or registerLazySingleton() to initialize the object just once.
+4. add the following to you main()
+```dart
+WidgetsFlutterBinding.ensureInitialized(); //make sure that all dependencies are initialised before app start.
+await di.init(); //init the dependencies
+```
+
+5. Make sure that the bloc will use the service locator inside the ``create:`` attribute
+```dart
+BlocProvider(
+        create: (context) => di.sl<ApiRequestBloc>(),
+        child: const MyHomePage(title: 'Bloc App'),
+      ),
+```
